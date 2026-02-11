@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'appstate.dart';
-//import 'settings.dart';
+import 'setting.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -45,8 +45,9 @@ class AppDrawer extends StatelessWidget {
                 title: appState.isBangla ? "সেটিংস" : "Settings",
                 context: context,
                 onTap: () {
-                  Navigator.pop(context); // drawer close
-                  //SettingsBottomSheet.show(context);
+                  Navigator.pop(context);
+                  //SettingsBottom.show(context);
+                  SettingsBottomSheet.show(context);
                 },
                 appState: appState,
               ),

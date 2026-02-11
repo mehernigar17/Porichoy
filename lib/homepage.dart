@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'appstate.dart';
+import 'appDrawer.dart';
 
 class homepage extends StatelessWidget {
   const homepage({super.key});
@@ -17,6 +18,8 @@ class homepage extends StatelessWidget {
 
   }){
     return SizedBox(
+        width: cardWidth,
+
         child: Container(
           height: 220,
           padding: const EdgeInsets.all(16),
@@ -114,7 +117,9 @@ class homepage extends StatelessWidget {
     screenWidth < 400 ? screenWidth - 32 : screenWidth / 2 - 24;
 
     return Scaffold(
-    //git  drawer: AppDrawer(appState: appstate),
+    // drawer: AppDrawer(appState: appstate),
+      //drawer: appDrawer(appState: appstate),
+      drawer: const AppDrawer(),
       backgroundColor:
       appstate.isDark ? Colors.black : const Color(0xffeefaf6),
       appBar: AppBar(
