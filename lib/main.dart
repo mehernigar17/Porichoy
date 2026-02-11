@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter/material.dart';
+import 'package:porichoy/homepage.dart';
 import 'package:provider/provider.dart';
 import 'appstate.dart';
-import 'darkmood.dart';
+import 'homepage.dart';
 
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (_) => AppState(),
+      create: (_) => Appstate(),
       child: const MyApp(),
     ),
   );
@@ -19,14 +18,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AppState>(
+    return Consumer<Appstate>(
       builder: (context, appState, _) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
 
 
           themeMode:
-          appState.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+          appState.isDark ? ThemeMode.dark : ThemeMode.light,
 
           theme: ThemeData(
             brightness: Brightness.light,
@@ -51,7 +50,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
 
-          home: const DarkMood(),
+          home: const homepage(),
         );
       },
     );
