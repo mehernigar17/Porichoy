@@ -7,6 +7,8 @@ import 'appstate.dart';
 import 'appDrawer.dart';
 import 'BirthPage.dart';
 import 'BirthCorrectionPage.dart';
+import 'nidapplication.dart';
+import 'nidcorrection.dart';
 
 
 class homepage extends StatelessWidget {
@@ -386,8 +388,8 @@ void showoptionDialougue(
                         arrowclick: () {
                           showoptionDialougue(
                             context,
-                            const NidPage(),
-                            const NidRenewPage(),
+                            const NidApplication(),
+                            const NidCorrection(),
                           );
                         }
                      // arrowclick: () {
