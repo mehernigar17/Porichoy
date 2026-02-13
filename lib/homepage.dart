@@ -12,6 +12,9 @@ import 'nidcorrection.dart';
 
 import 'passportapplication.dart';
 import 'passportrenew.dart';
+import 'hscpage.dart';
+import 'sscpage.dart';
+
 
 class homepage extends StatelessWidget {
   const homepage({super.key});
@@ -235,7 +238,7 @@ void showoptionDialougue(
                   fontWeight: FontWeight.w700,
                   color: Colors.white,
                 )
-                    : GoogleFonts.bungee(
+                    : GoogleFonts.poppins(
                   fontSize: 16,
                   fontWeight: FontWeight.w900,
                   color: Colors.white,
@@ -253,7 +256,7 @@ void showoptionDialougue(
                   fontWeight: FontWeight.w500,
                   color: Colors.grey[300],
                 )
-                    : GoogleFonts.bungee(
+                    : GoogleFonts.poppins(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
                   color: Colors.grey[300],
@@ -329,7 +332,7 @@ void showoptionDialougue(
                     fontWeight: FontWeight.w700,
                     color: appstate.isDark?Colors.white:Colors.green[900],
                   )
-                      :GoogleFonts.bungee(
+                      :GoogleFonts.poppins(
                     fontSize: 24,
                     fontWeight: FontWeight.w900,
                     color: appstate.isDark?Colors.white:Colors.green[900],
@@ -441,8 +444,8 @@ void showoptionDialougue(
                       arrowclick: () {
                         showoptionDialougue(
                           context,
-                          const HscPage(),
-                          const SscPage(),
+                          const Hscpage(),
+                          const Sscpage(),
                           firstButtonText: "HSC Certificate",
                           secondButtonText: "SSC Certificate",
                         );
