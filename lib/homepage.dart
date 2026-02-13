@@ -294,18 +294,47 @@ void showoptionDialougue(
         iconTheme: IconThemeData(
           color: appstate.isDark ? Colors.white : Colors.black,
         ),
+        //actions: [
+         // Padding(padding:
+       //const EdgeInsets.only(right: 16),
+           // child: CircleAvatar(
+             // radius: 18,
+            //  backgroundColor: Colors.lightGreen[900],
+            //  child: const Icon(
+               // Icons.notifications,
+                //color: Colors.white,
+               // size: 20,
+             // ),
+            //)
+          //)
+        //],
         actions: [
-          Padding(padding:
-       const EdgeInsets.only(right: 16),
-            child: CircleAvatar(
-              radius: 18,
-              backgroundColor: Colors.lightGreen[900],
-              child: const Icon(
-                Icons.notifications,
-                color: Colors.white,
-                size: 20,
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: appstate.isDark
+                        ? Colors.black54
+                        : Colors.grey.withOpacity(0.5),
+                    blurRadius: 10,
+                    spreadRadius: 2,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
               ),
-            )
+              child: const CircleAvatar(
+                radius: 18,
+                backgroundColor: Colors.green,
+                child: Icon(
+                  Icons.notifications,
+                  color: Colors.white,
+                  size: 20,
+                ),
+              ),
+            ),
           )
         ],
 
