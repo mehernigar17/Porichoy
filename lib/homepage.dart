@@ -20,18 +20,23 @@ void showoptionDialougue(
     BuildContext context,
     Widget firstpage,
     Widget corrOrrenewpage,
+    {
+      String? firstButtonText,
+      String? secondButtonText,
+    }
 
 
     ){
   final appState=Provider.of<Appstate>(context,listen: false);
-  showGeneralDialog(context: context,
-      barrierDismissible: true,
-      barrierLabel:"Options",
-      barrierColor: Colors.black.withOpacity(0.4),
-      transitionDuration: const Duration(milliseconds: 250),
-      pageBuilder: (context,animation,secondaryAnimation) {
-    return BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 5,sigmaY: 5),
+  showGeneralDialog(
+    context: context,
+    barrierDismissible: true,
+    barrierLabel: "Options",
+    barrierColor: Colors.black.withOpacity(0.4),
+    transitionDuration: const Duration(milliseconds: 250),
+    pageBuilder: (context, animation, secondaryAnimation) {
+      return BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
         child: Center(
           child: Material(
             color: Colors.transparent,
@@ -39,7 +44,8 @@ void showoptionDialougue(
               width: 280,
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: appState.isDark?const Color(0xff1e1e1e)
+                color: appState.isDark
+                    ? const Color(0xff1e1e1e)
                     : Colors.white,
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
@@ -47,52 +53,46 @@ void showoptionDialougue(
                     color: Colors.black.withOpacity(0.2),
                     blurRadius: 20,
                     offset: const Offset(0, 10),
-                )
-                ]
+                  ),
+                ],
               ),
-
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
                     appState.isBangla
-                     ?"একটি অপশন নির্বাচন করুন"
+                        ? "একটি অপশন নির্বাচন করুন"
                         : "Choose an Option",
-                style: appState.isBangla
-                    ? GoogleFonts.notoSansBengali(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: appState.isDark ? Colors.white : Colors.black,
-                )
-                    :GoogleFonts.poppins(
+                    style: TextStyle(
                       fontSize: 16,
-                      fontWeight:FontWeight.bold,
-                      color: appState.isDark? Colors.white
-                      : Colors.black,
-
-                    ) ,
+                      fontWeight: FontWeight.bold,
+                      color: appState.isDark
+                          ? Colors.white
+                          : Colors.black,
+                    ),
                   ),
                   const SizedBox(height: 20),
+
+
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Navigator.pop(context);
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_)=>firstpage)
+                        MaterialPageRoute(builder: (_) => firstpage),
                       );
                     },
                     child: Container(
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       decoration: BoxDecoration(
-                        color: Colors.green,////////////////
+                        color: Colors.green,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Center(
                         child: Text(
-                          appState.isBangla
-                              ? " আবেদন"
-                              : " Application",
+                          firstButtonText ??
+                              (appState.isBangla ? " আবেদন" : " Application"),
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w600,
@@ -100,13 +100,9 @@ void showoptionDialougue(
                         ),
                       ),
                     ),
-
-
                   ),
 
-
                   const SizedBox(height: 12),
-
 
                   GestureDetector(
                     onTap: () {
@@ -125,7 +121,8 @@ void showoptionDialougue(
                       ),
                       child: Center(
                         child: Text(
-                          appState.isBangla ? "সংশোধন/নবায়ন" : "Correction/Renew",
+                          secondButtonText ??
+                              (appState.isBangla ? "সংশোধন/নবায়ন" : "Correction/Renew"),
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w600,
@@ -134,19 +131,13 @@ void showoptionDialougue(
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),
           ),
         ),
-
-
-
-        );
-
-
-  }
+      );
+    },
   );
 
 
@@ -450,8 +441,10 @@ void showoptionDialougue(
                       arrowclick: () {
                         showoptionDialougue(
                           context,
-                          const EducationPage(),
-                          const EducationRenewPage(),
+                          const HscPage(),
+                          const SscPage(),
+                          firstButtonText: "HSC Certificate",
+                          secondButtonText: "SSC Certificate",
                         );
                       },
                      // arrowclick: () {
