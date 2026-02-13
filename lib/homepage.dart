@@ -89,7 +89,7 @@ void showoptionDialougue(
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       decoration: BoxDecoration(
-                        color: Colors.green,
+                        color: const Color(0xFF0F7A4F),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Center(
@@ -189,7 +189,7 @@ void showoptionDialougue(
           height: 220,
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: isDark?Colors.grey[900]:Colors.lightGreen[900],
+            color: isDark?Colors.grey[900]:const Color(0xFF0F7A4F),
             borderRadius: BorderRadius.circular(22),
             boxShadow:[
               BoxShadow(
@@ -201,27 +201,50 @@ void showoptionDialougue(
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+
                 children: [
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Colors.green,
+                      color: Color(0xFF1F8F63),
                       borderRadius: BorderRadius.circular(14),
                     ),
                     child: Icon(icon, color: Colors.white, size: 26),
                   ),
-                  InkWell(
-                    onTap: arrowclick,
-                    borderRadius: BorderRadius.circular(20),
-                    child: const Icon(
-                      Icons.arrow_forward_ios,
-                      color: Colors.white,
-                      size: 18,
+                  const Spacer(),
+
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: InkWell(
+                      onTap: arrowclick,
+                      borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF1F8F63),
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color(0xFF1F8F63).withOpacity(0.45),
+                              blurRadius: 16,
+                              offset: const Offset(0, 6),
+                            ),
+                          ],
+                        ),
+                        child: const Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                      ),
                     ),
-                  )
+                  ),
+
 
 
 
@@ -282,8 +305,7 @@ void showoptionDialougue(
     screenWidth < 400 ? screenWidth - 32 : screenWidth / 2 - 24;
 
     return Scaffold(
-    // drawer: AppDrawer(appState: appstate),
-      //drawer: appDrawer(appState: appstate),
+
       drawer: const AppDrawer(),
       backgroundColor:
       appstate.isDark ? Colors.black : const Color(0xffeefaf6),
@@ -294,56 +316,29 @@ void showoptionDialougue(
         iconTheme: IconThemeData(
           color: appstate.isDark ? Colors.white : Colors.black,
         ),
-        //actions: [
-         // Padding(padding:
-       //const EdgeInsets.only(right: 16),
-           // child: CircleAvatar(
-             // radius: 18,
-            //  backgroundColor: Colors.lightGreen[900],
-            //  child: const Icon(
-               // Icons.notifications,
-                //color: Colors.white,
-               // size: 20,
-             // ),
-            //)
-          //)
-        //],
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: appstate.isDark
-                        ? Colors.black54
-                        : Colors.grey.withOpacity(0.5),
-                    blurRadius: 10,
-                    spreadRadius: 2,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
+         Padding(padding:
+       const EdgeInsets.only(right: 16),
+            child: CircleAvatar(
+              radius: 18,
+             backgroundColor: const Color(0xFF0F7A4F),
+             child: const Icon(
+               Icons.notifications,
+               color: Colors.white,
+                size: 20,
               ),
-              child: const CircleAvatar(
-                radius: 18,
-                backgroundColor: Colors.green,
-                child: Icon(
-                  Icons.notifications,
-                  color: Colors.white,
-                  size: 20,
-                ),
-              ),
-            ),
+            )
           )
         ],
 
 
 
-
-
       ),
-      body: SafeArea(
+
+
+
+
+        body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -359,12 +354,12 @@ void showoptionDialougue(
                       ? GoogleFonts.hindSiliguri(
                     fontSize: 24,
                     fontWeight: FontWeight.w700,
-                    color: appstate.isDark?Colors.white:Colors.green[900],
+                    color: appstate.isDark?Colors.white:const Color(0xFF0F7A4F),
                   )
                       :GoogleFonts.poppins(
                     fontSize: 24,
                     fontWeight: FontWeight.w900,
-                    color: appstate.isDark?Colors.white:Colors.green[900],
+                    color: appstate.isDark?Colors.white:const Color(0xFF0F7A4F),
                   ),
                 ),
                 const SizedBox(height: 28),
@@ -417,14 +412,7 @@ void showoptionDialougue(
                             const NidCorrection(),
                           );
                         }
-                     // arrowclick: () {
-                        // Navigator.push(
-                        //context,
-                        //MaterialPageRoute(
-                        // builder: (_) => const NidPage(),
-                        //),
-                        // );
-                      //},
+
                     ),
                     categoryCard(
                       icon: Icons.flight,
@@ -447,14 +435,7 @@ void showoptionDialougue(
                           const PassportRenewPage(),
                         );
                       },
-                     // arrowclick: () {
-                        // Navigator.push(
-                        //  context,
-                        //  MaterialPageRoute(
-                        //   builder: (_) => const PassportPage(),
-                        // ),
-                        // );
-                    //  },
+
                     ),
                     categoryCard(
                       icon: Icons.school,
@@ -479,14 +460,7 @@ void showoptionDialougue(
                           secondButtonText: "SSC Certificate",
                         );
                       },
-                     // arrowclick: () {
-                        // Navigator.push(
-                        //  context,
-                        //  MaterialPageRoute(
-                        // builder: (_) => const EducationPage(),
-                        //),
-                        //);
-                     // },
+
                     ),
                   ],
                 ),
