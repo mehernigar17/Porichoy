@@ -10,6 +10,8 @@ import 'BirthCorrectionPage.dart';
 import 'nidapplication.dart';
 import 'nidcorrection.dart';
 
+import 'passportapplication.dart';
+import 'passportrenew.dart';
 
 class homepage extends StatelessWidget {
   const homepage({super.key});
@@ -418,7 +420,7 @@ void showoptionDialougue(
                       arrowclick: () {
                         showoptionDialougue (
                           context,
-                          const PassportPage(),
+                          const PassportAppliPage(),
                           const PassportRenewPage(),
                         );
                       },
