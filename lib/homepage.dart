@@ -1,10 +1,177 @@
+
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'appstate.dart';
+import 'appDrawer.dart';
+import 'BirthPage.dart';
+import 'BirthCorrectionPage.dart';
+import 'nidapplication.dart';
+import 'nidcorrection.dart';
+
+import 'passportapplication.dart';
+import 'passportrenew.dart';
+import 'hscpage.dart';
+import 'sscpage.dart';
+
 
 class homepage extends StatelessWidget {
   const homepage({super.key});
+
+  void showoptionDialougue(
+      BuildContext context,
+      Widget firstpage,
+      Widget corrOrrenewpage,
+      {
+        String? firstButtonText,
+        String? secondButtonText,
+      }
+
+
+      ){
+    final appState=Provider.of<Appstate>(context,listen: false);
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: "Options",
+      barrierColor: Colors.black.withOpacity(0.4),
+      transitionDuration: const Duration(milliseconds: 250),
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+          child: Center(
+            child: Material(
+              color: Colors.transparent,
+              child: Container(
+                width: 280,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: appState.isDark
+                      ? const Color(0xff1e1e1e)
+                      : Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      blurRadius: 20,
+                      offset: const Offset(0, 10),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      appState.isBangla
+                          ? "একটি অপশন নির্বাচন করুন"
+                          : "Choose an Option",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: appState.isDark
+                            ? Colors.white
+                            : Colors.black,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+
+
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => firstpage),
+                        );
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF0F7A4F),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Center(
+                          child: Text(
+                            firstButtonText ??
+                                (appState.isBangla ? " আবেদন" : " Application"),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 12),
+
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => corrOrrenewpage),
+                        );
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        decoration: BoxDecoration(
+                          color: Colors.blueGrey,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Center(
+                          child: Text(
+                            secondButtonText ??
+                                (appState.isBangla ? "সংশোধন/নবায়ন" : "Correction/Renew"),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+
+
+
+
+
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   Widget categoryCard({
     required IconData icon,
     required String title,
@@ -17,11 +184,13 @@ class homepage extends StatelessWidget {
 
   }){
     return SizedBox(
+        width: cardWidth,
+
         child: Container(
           height: 220,
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: isDark?Colors.grey[900]:Colors.lightGreen[900],
+            color: isDark?Colors.grey[900]:const Color(0xFF0F7A4F),
             borderRadius: BorderRadius.circular(22),
             boxShadow:[
               BoxShadow(
@@ -33,27 +202,50 @@ class homepage extends StatelessWidget {
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+
                 children: [
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Colors.green,
+                      color: Color(0xFF1F8F63),
                       borderRadius: BorderRadius.circular(14),
                     ),
                     child: Icon(icon, color: Colors.white, size: 26),
                   ),
-                  InkWell(
-                    onTap: arrowclick,
-                    borderRadius: BorderRadius.circular(20),
-                    child: const Icon(
-                      Icons.arrow_forward_ios,
-                      color: Colors.white,
-                      size: 18,
+                  const Spacer(),
+
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: InkWell(
+                      onTap: arrowclick,
+                      borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF1F8F63),
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color(0xFF1F8F63).withOpacity(0.45),
+                              blurRadius: 16,
+                              offset: const Offset(0, 6),
+                            ),
+                          ],
+                        ),
+                        child: const Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                      ),
                     ),
-                  )
+                  ),
+
 
 
 
@@ -70,7 +262,7 @@ class homepage extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                   color: Colors.white,
                 )
-                    : GoogleFonts.bungee(
+                    : GoogleFonts.poppins(
                   fontSize: 16,
                   fontWeight: FontWeight.w900,
                   color: Colors.white,
@@ -88,7 +280,7 @@ class homepage extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   color: Colors.grey[300],
                 )
-                    : GoogleFonts.bungee(
+                    : GoogleFonts.poppins(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
                   color: Colors.grey[300],
@@ -114,7 +306,8 @@ class homepage extends StatelessWidget {
     screenWidth < 400 ? screenWidth - 32 : screenWidth / 2 - 24;
 
     return Scaffold(
-    //git  drawer: AppDrawer(appState: appstate),
+
+      drawer: const AppDrawer(),
       backgroundColor:
       appstate.isDark ? Colors.black : const Color(0xffeefaf6),
       appBar: AppBar(
@@ -124,7 +317,28 @@ class homepage extends StatelessWidget {
         iconTheme: IconThemeData(
           color: appstate.isDark ? Colors.white : Colors.black,
         ),
+        actions: [
+          Padding(padding:
+          const EdgeInsets.only(right: 16),
+              child: CircleAvatar(
+                radius: 18,
+                backgroundColor: const Color(0xFF0F7A4F),
+                child: const Icon(
+                  Icons.notifications,
+                  color: Colors.white,
+                  size: 20,
+                ),
+              )
+          )
+        ],
+
+
+
       ),
+
+
+
+
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -141,12 +355,12 @@ class homepage extends StatelessWidget {
                       ? GoogleFonts.hindSiliguri(
                     fontSize: 24,
                     fontWeight: FontWeight.w700,
-                    color: Colors.green[900],
+                    color: appstate.isDark?Colors.white:const Color(0xFF0F7A4F),
                   )
-                      :GoogleFonts.bungee(
+                      :GoogleFonts.poppins(
                     fontSize: 24,
                     fontWeight: FontWeight.w900,
-                    color: Colors.green[900],
+                    color: appstate.isDark?Colors.white:const Color(0xFF0F7A4F),
                   ),
                 ),
                 const SizedBox(height: 28),
@@ -167,33 +381,39 @@ class homepage extends StatelessWidget {
                       isDark: appstate.isDark,
                       isBangla: appstate.isBangla,
                       arrowclick: () {
-                        //Navigator.push(
-                        // context,
-                        // MaterialPageRoute(
-                        // builder: (_) => const BirthPage(),
-                        // ),
-                        // );
+                        showoptionDialougue(
+                          context,
+                          const BirthPage(),
+                          const BirthCorrectionPage(),
+                        );
                       },
+
+
+
+
+
+
+
                     ),
                     categoryCard(
-                      icon: Icons.credit_card,
-                      title: appstate.isBangla
-                          ? "জাতীয় পরিচয়পত্র"
-                          : "National ID Card",
-                      subtitle: appstate.isBangla
-                          ? "এনআইডি সেবা"
-                          : "NID application & services",
-                      cardWidth: cardWidth,
-                      isDark: appstate.isDark,
-                      isBangla: appstate.isBangla,
-                      arrowclick: () {
-                        // Navigator.push(
-                        //context,
-                        //MaterialPageRoute(
-                        // builder: (_) => const NidPage(),
-                        //),
-                        // );
-                      },
+                        icon: Icons.credit_card,
+                        title: appstate.isBangla
+                            ? "জাতীয় পরিচয়পত্র"
+                            : "National ID Card",
+                        subtitle: appstate.isBangla
+                            ? "এনআইডি সেবা"
+                            : "NID application & services",
+                        cardWidth: cardWidth,
+                        isDark: appstate.isDark,
+                        isBangla: appstate.isBangla,
+                        arrowclick: () {
+                          showoptionDialougue(
+                            context,
+                            const NidApplication(),
+                            const NidCorrection(),
+                          );
+                        }
+
                     ),
                     categoryCard(
                       icon: Icons.flight,
@@ -205,14 +425,18 @@ class homepage extends StatelessWidget {
                       cardWidth: cardWidth,
                       isDark: appstate.isDark,
                       isBangla: appstate.isBangla,
+
+
+
+
                       arrowclick: () {
-                        // Navigator.push(
-                        //  context,
-                        //  MaterialPageRoute(
-                        //   builder: (_) => const PassportPage(),
-                        // ),
-                        // );
+                        showoptionDialougue (
+                          context,
+                          const PassportAppliPage(),
+                          const PassportRenewPage(),
+                        );
                       },
+
                     ),
                     categoryCard(
                       icon: Icons.school,
@@ -225,14 +449,19 @@ class homepage extends StatelessWidget {
                       cardWidth: cardWidth,
                       isDark: appstate.isDark,
                       isBangla: appstate.isBangla,
+
+
+
                       arrowclick: () {
-                        // Navigator.push(
-                        //  context,
-                        //  MaterialPageRoute(
-                        // builder: (_) => const EducationPage(),
-                        //),
-                        //);
+                        showoptionDialougue(
+                          context,
+                          const Hscpage(),
+                          const Sscpage(),
+                          firstButtonText: "HSC Certificate",
+                          secondButtonText: "SSC Certificate",
+                        );
                       },
+
                     ),
                   ],
                 ),
