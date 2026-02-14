@@ -13,7 +13,7 @@ class AppDrawer extends StatelessWidget {
     return Consumer<Appstate>(
       builder: (context, appState, _) {
         return Drawer(
-          backgroundColor: appState.isDark ? Colors.grey[900] : Colors.white,
+          backgroundColor: appState.isDark ? Colors.grey[900] : const Color(0xffeefaf6),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,7 +88,7 @@ Widget drawerItem({
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: Row(
         children: [
-          Icon(icon, color: Colors.green, size: 26),
+          Icon(icon, color: Colors.lightGreen[900], size: 26),
           const SizedBox(width: 12),
           Text(
             title,
