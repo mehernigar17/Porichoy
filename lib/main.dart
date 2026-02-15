@@ -3,6 +3,7 @@ import 'package:porichoy/homepage.dart';
 import 'package:provider/provider.dart';
 import 'appstate.dart';
 import 'homepage.dart';
+import 'login.dart';
 
 void main() {
   runApp(
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
 
-          home: const homepage(),
+          home: login(),
         );
       },
     );
