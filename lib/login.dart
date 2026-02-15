@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:porichoy/homepage.dart';
 import 'package:porichoy/signup.dart';
+import 'package:porichoy/appstate.dart';
+import 'package:provider/provider.dart';
 
 class login extends StatefulWidget {
   const login({super.key});
@@ -9,7 +12,6 @@ class login extends StatefulWidget {
   @override
   State<login> createState() => _loginState();
 }
-
 class _loginState extends State<login> {
   var numberText=TextEditingController();
   var passText=TextEditingController();
@@ -22,7 +24,10 @@ class _loginState extends State<login> {
         backgroundColor: Colors.white,
         actions: [
           IconButton(
-              onPressed: (){},
+              onPressed: (){
+                final appstate=context.read<Appstate>();
+                appstate.setLanguage(!appstate.isBangla);
+              },
               icon: Icon(Icons.language,color:const Color(0xFF0F7A4F))
           )
         ],
@@ -44,11 +49,24 @@ class _loginState extends State<login> {
                   keyboardType: TextInputType.numberWithOptions(),
                   controller: numberText,
                   decoration: InputDecoration(
-                    labelText: 'Mobile Number',
-                    labelStyle: TextStyle(
+                    labelText: context.watch<Appstate>().isBangla
+                    ?"মোবাইল নম্বর"
+                    :'Mobile Number',
+                    hintText:context.watch<Appstate>().isBangla
+                    ?"মোবাইল নম্বর লিখুন"
+                    :'Enter Mobile Number',
+                    hintStyle:context.watch<Appstate>().isBangla
+                        ? GoogleFonts.hindSiliguri(
+                        color:const Color(0xFF0F7A4F),
+                        fontWeight:FontWeight.w500 )
+                        :GoogleFonts.poppins(
+                      color:const Color(0xFF0F7A4F),) ,
+                    labelStyle:  context.watch<Appstate>().isBangla
+                        ? GoogleFonts.hindSiliguri(
                       color:const Color(0xFF0F7A4F),
-                    ),
-                    hintText: 'Enter Mobile Number',
+                      fontWeight:FontWeight.w500 )
+                        :GoogleFonts.poppins(
+                      color:const Color(0xFF0F7A4F),),
                     prefixIcon: Icon(Icons.phone,color: const Color(0xFF0F7A4F),),
                     focusedBorder:OutlineInputBorder(
                         borderRadius: BorderRadius.circular(11),
@@ -77,11 +95,24 @@ class _loginState extends State<login> {
                   obscureText: _obsecureText,
                   controller: passText,
                   decoration: InputDecoration(
-                      labelText:'Password' ,
-                      labelStyle: TextStyle(
-                        color:const Color(0xFF0F7A4F),
-                      ),
-                      hintText: 'Password',
+                      labelText: context.watch<Appstate>().isBangla
+                          ?"পাসওয়ার্ড "
+                          :'Password',
+                      hintText:context.watch<Appstate>().isBangla
+                          ?"পাসওয়ার্ড"
+                          :'Password',
+                      hintStyle:context.watch<Appstate>().isBangla
+                          ? GoogleFonts.hindSiliguri(
+                          color:const Color(0xFF0F7A4F),
+                          fontWeight:FontWeight.w500 )
+                          :GoogleFonts.poppins(
+                        color:const Color(0xFF0F7A4F),) ,
+                      labelStyle:  context.watch<Appstate>().isBangla
+                          ? GoogleFonts.hindSiliguri(
+                          color:const Color(0xFF0F7A4F),
+                          fontWeight:FontWeight.w500 )
+                          :GoogleFonts.poppins(
+                        color:const Color(0xFF0F7A4F),),
                       focusedBorder:OutlineInputBorder(
                           borderRadius: BorderRadius.circular(11),
                           borderSide: BorderSide(
@@ -129,11 +160,18 @@ class _loginState extends State<login> {
                       backgroundColor: const Color(0xFF0F7A4F),
                       minimumSize: Size(400, 50)
                   ),
-                  child:Text('login',
-                    style: TextStyle(
-                      color:Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  child:Text(context.watch<Appstate>().isBangla
+                    ?"লগইন "
+                    :"Login",
+                    style: context.watch<Appstate>().isBangla
+                        ? GoogleFonts.hindSiliguri(
+                        color:Colors.white,
+                        fontSize: 16,
+                        fontWeight:FontWeight.w600 )
+                        :GoogleFonts.poppins(
+                        color:Colors.white,
+                        fontSize: 16,
+                        fontWeight:FontWeight.w600) ,
                   ),
                 ),
               ),
@@ -141,11 +179,18 @@ class _loginState extends State<login> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Dont Have an Account?",
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
+                  Text(context.watch<Appstate>().isBangla
+                    ?"কোন অ্যাকাউন্ট নেই?"
+                    :"Dont Have an Account?",
+                    style: context.watch<Appstate>().isBangla
+                        ? GoogleFonts.hindSiliguri(
+                        color:Colors.black,
+                        fontSize: 16,
+                         )
+                        :GoogleFonts.poppins(
+                        color:Colors.black,
+                        fontSize: 16,
+                        ),),
                   TextButton(onPressed: (){
                     Navigator.push(
                       context,
@@ -154,14 +199,22 @@ class _loginState extends State<login> {
                       ),
                     );
                   },
-                    child: Text("Sign Up Now",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                        color: const Color(0xFF0F7A4F),
-                      ),
+                    child: Text(context.watch<Appstate>().isBangla
+                      ?"সাইন আপ করুন"
+                      :"Sign Up Now",
+                      style: context.watch<Appstate>().isBangla
+                          ? GoogleFonts.hindSiliguri(
+                           fontWeight: FontWeight.bold,
+                           fontSize: 15,
+                           color: const Color(0xFF0F7A4F),
+                      )
+                          :GoogleFonts.poppins(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                            color: const Color(0xFF0F7A4F),
+                      ),),
+
                     ),
-                  )
                 ],
               )
             ],
