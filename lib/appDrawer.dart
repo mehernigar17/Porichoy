@@ -88,7 +88,7 @@ Widget drawerItem({
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: Row(
         children: [
-          Icon(icon, color: Colors.lightGreen[900], size: 26),
+          Icon(icon, color: const Color(0xFF0F7A4F), size: 26),
           const SizedBox(width: 12),
           Text(
             title,
