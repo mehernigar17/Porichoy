@@ -1,9 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:porichoy/progress.dart';
 import 'package:provider/provider.dart';
 import 'appstate.dart';
 import 'setting.dart';
+
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -24,8 +26,15 @@ class AppDrawer extends StatelessWidget {
                 icon: Icons.bar_chart,
                 title: appState.isBangla ? "প্রগেস" : "Progress",
                 context: context,
-                onTap: () {},
                 appState: appState,
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder:(context)=>progress(),
+                      ),
+                  );
+                },
               ),
 
               const SizedBox(height: 12),
