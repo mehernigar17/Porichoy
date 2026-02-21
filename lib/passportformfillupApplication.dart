@@ -453,6 +453,39 @@ ScaffoldMessenger.of(context).showSnackBar(
 
 
 
+              SizedBox(height: 20),
+
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: submit,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF0F7A4F),
+                    padding: EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: Text(
+                    isBangla ? "জমা দিন" : "Submit",
+                    style: isBangla
+                        ? GoogleFonts.hindSiliguri(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    )
+                        : GoogleFonts.inter(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+
+              SizedBox(height: 30),
+
+
 
             ],
             
