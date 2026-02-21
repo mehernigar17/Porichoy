@@ -10,6 +10,10 @@ class NidCorrection extends StatefulWidget {
 class _NidCorrectionState extends State<NidCorrection> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("meher"),
+      ),
+    );
   }
 }

@@ -10,6 +10,10 @@ class NidApplication extends StatefulWidget {
 class _NidApplicationState extends State<NidApplication> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("checkk"),
+      ),
+    );
   }
 }
