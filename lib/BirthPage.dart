@@ -10,6 +10,10 @@ class BirthPage extends StatefulWidget {
 class _BirhPageState extends State<BirthPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+
+      ),
+    );
   }
 }
