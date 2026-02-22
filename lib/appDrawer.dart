@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:porichoy/complainbox.dart';
 import 'package:provider/provider.dart';
 import 'appstate.dart';
 import 'setting.dart';
@@ -45,9 +46,16 @@ class AppDrawer extends StatelessWidget {
 
               drawerItem(
                 icon: Icons.report_problem,
-                title: appState.isBangla ? "অভিযোগ" : "Complain",
+                title: appState.isBangla ? "অভিযোগ বাক্স" : "Complaint Box",
                 context: context,
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:(context)=>Complainbox(),
+                    ),
+                  );
+                },
                 appState: appState,
               ),
 
