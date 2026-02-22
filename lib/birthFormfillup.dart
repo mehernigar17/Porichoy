@@ -1,16 +1,17 @@
+import 'package:porichoy/appstate.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'appstate.dart';
 
-class FormFillPage extends StatefulWidget {
-  const FormFillPage({super.key});
+class Birthformfillup extends StatefulWidget {
+  const Birthformfillup({super.key});
 
   @override
-  State<FormFillPage> createState() => _FormFillPageState();
+  State<Birthformfillup> createState() => _BirthformfillupState();
 }
 
-class _FormFillPageState extends State<FormFillPage> {
+class _BirthformfillupState extends State<Birthformfillup> {
 
 
   bool isBangla = false;
@@ -23,40 +24,20 @@ class _FormFillPageState extends State<FormFillPage> {
   final fatherName=TextEditingController();
   final motherName=TextEditingController();
   final dateBirth=TextEditingController();
-  final birthReg=TextEditingController();
-  final Nid=TextEditingController();
   final religion=TextEditingController();
-  final birthPlace=TextEditingController();
-
-
-
-
   final perVillage=TextEditingController();
   final perPost=TextEditingController();
   final perThana=TextEditingController();
   final perDistrict=TextEditingController();
   final perDivision=TextEditingController();
-
-
-
-
   final preVillage=TextEditingController();
   final prePost=TextEditingController();
   final preThana=TextEditingController();
   final preDistrict=TextEditingController();
   final preDivision=TextEditingController();
-
-
-
-
-
-
   final guardianName=TextEditingController();
   final guardianNid=TextEditingController();
   final guardianPhone=TextEditingController();
-
-
-
   final mobile=TextEditingController();
   final altMobile=TextEditingController();
   final email=TextEditingController();
@@ -66,11 +47,6 @@ class _FormFillPageState extends State<FormFillPage> {
   String gender="Male";
   String maritalStatus="Single";
   String relation="Father";
-  String passportType = "Ordinary";
-  String pageCount = "48";
-  String validity = "5 Years";
-  String policeVerify = "Yes";
-  String urgentType = "Regular";
   bool sameAddress=false;
   Widget field(String label, TextEditingController controller,bool isDark)
   {
@@ -81,9 +57,7 @@ class _FormFillPageState extends State<FormFillPage> {
       child: TextFormField(
         controller: controller,
         validator: (value)=> value == null || value.isEmpty ? "Required" : null,
-        //style: TextStyle(
-        // color: isDark?Colors.white:  Color(0xFF0F7A4F),
-        //),
+
         decoration: InputDecoration(
             labelText: label,
             labelStyle: TextStyle(
@@ -114,7 +88,6 @@ class _FormFillPageState extends State<FormFillPage> {
 
     );
   }
-
 
 
   Widget dropdown(String label,String value,List <String> items,Function(String?)onChanged, {bool isDark = false}){
@@ -175,7 +148,6 @@ class _FormFillPageState extends State<FormFillPage> {
 
 
 
-
   Widget  sectionTitle(String text){
     return Container(
       //color: Color(0xFF0F7A4F),
@@ -231,64 +203,39 @@ class _FormFillPageState extends State<FormFillPage> {
     );
 
   }
-
-
-
   void submit (){
     if(formkey.currentState!.validate()){
 
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Form validated successfully!"),)
       );
-
-
-
-    }
-
-
-
-
-
-
-
+   }
 
   }
 
-
-
-
-
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
-
     final appState = Provider.of<Appstate>(context);
-
     bool isDark = appState.isDark;
     bool isBangla = appState.isBangla;
     return Scaffold(
         backgroundColor: isDark?Colors.black:Colors.white,
         appBar: AppBar(
           backgroundColor:const Color(0xFF0F7A4F),
-          title:Text(isBangla?"পাসপোর্ট আবেদন ফর্ম": "Passport Application Form",
+          title:Text(isBangla?"জন্ম নিবন্ধনের জন্য আবেদন" : "Application for birth registration",
             textAlign: TextAlign.center,
             style: isBangla?GoogleFonts.hindSiliguri(
-                fontSize: 25,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color:Colors.white)
                 :GoogleFonts.inter(
-                fontSize: 25,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: Colors.white
 
             ),
 
           ),
-
 
         ) ,
         body: SingleChildScrollView(
@@ -300,35 +247,21 @@ class _FormFillPageState extends State<FormFillPage> {
                     sectionTitle(isBangla?"ব্যক্তিগত তথ্য":"Personal Information"),
                     field(isBangla?"পূর্ণ নাম (বাংলায়)":"Full Name In Bangla",fullNameBn,isDark ),
                     field(isBangla?" পূর্ণ নাম (ইংরেজিতে)":"Full Name In English",fullNameEn ,isDark),
-
                     field(isBangla?"পিতার নাম":"Fathers's Name",fatherName ,isDark),
-
                     field(isBangla?"মাতার নাম":"Mothers's Name",fullNameBn,isDark ),
                     field(isBangla ? "ধর্ম" : "Religion", religion,isDark),
-                    field(isBangla ? "জন্মস্থান" : "Place of Birth", birthPlace,isDark),
-
                     GestureDetector(
                       onTap: pickDate,
                       child: AbsorbPointer(
                         child: field(isBangla?"জন্ম তারিখ":"Date of Birth", dateBirth,isDark),
-
                       ),
                     ),
 
-                    field(isBangla?"জন্ম নিবন্ধন নম্বর":"Birth Certificate Number", birthReg,isDark),
-                    field(isBangla?"জাতীয় পরিচয়পত্র নম্বর (NID)":"Nation Id Card Number",Nid ,isDark),
 
                     dropdown(isBangla?"লিঙ্গ":"Gender", gender,
                       ["Male","Female","Others"],
                           (val) => setState(() => gender = val!)
                       , isDark: isDark,),
-
-
-                    dropdown(isBangla?"বৈবাহিক অবস্থা":"Marital Status", maritalStatus,
-                      ["Single","Married"],
-                          (val)=>setState(()=>maritalStatus=val!),
-                      isDark: isDark,
-                    ),
 
                     sectionTitle(isBangla ? "যোগাযোগের ঠিকানা" : "Contact Address"),
 
@@ -382,72 +315,6 @@ class _FormFillPageState extends State<FormFillPage> {
                     field(isBangla ? "ইমেইল ঠিকানা" : "Email Address", email,isDark),
 
 
-                    sectionTitle(isBangla ? "পাসপোর্ট সংক্রান্ত তথ্য" : "Passport Information"),
-
-                    dropdown(
-                      isBangla ? "পাসপোর্ট টাইপ" : "Passport Type",
-                      passportType,
-                      ["Ordinary","Official","Diplomatic"],
-                          (val) => setState(() => passportType = val!),
-                      isDark: isDark,
-                    ),
-
-                    dropdown(
-                      isBangla ? "পৃষ্ঠা সংখ্যা" : "Page Count",
-                      pageCount,
-                      ["48","64"],
-                          (val) => setState(() => pageCount = val!),
-                      isDark: isDark,
-                    ),
-
-                    dropdown(
-                      isBangla ? "মেয়াদ" : "Validity",
-                      validity,
-                      ["5 Years","10 Years"],
-                          (val) => setState(() => validity = val!),
-                      isDark: isDark,
-                    ),
-
-                    dropdown(
-                      isBangla ? "পুলিশ ভেরিফিকেশন প্রয়োজন?" : "Police Verification Required?",
-                      policeVerify,
-                      ["Yes","No"],
-                          (val) => setState(() => policeVerify = val!),
-                      isDark: isDark,
-                    ),
-
-                    dropdown(
-                      isBangla ? "জরুরি আবেদন?" : "Urgent Application?",
-                      urgentType,
-                      ["Regular","Express"],
-                          (val) => setState(() => urgentType = val!),
-                      isDark: isDark,
-                    ),
-
-
-                    sectionTitle(isBangla ? "ছবি আপলোড" : "Photo Upload"),
-
-                    Container(
-                      height: 120,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.green),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.camera_alt, size: 40, color: Colors.green),
-                            SizedBox(height: 8),
-                            Text(isBangla ? "ছবি আপলোড করুন" : "upload picture here"),
-                          ],
-                        ),
-                      ),
-                    ),
-
-
-
                     SizedBox(height: 20),
 
                     SizedBox(
@@ -479,7 +346,6 @@ class _FormFillPageState extends State<FormFillPage> {
                     ),
 
                     SizedBox(height: 30),
-
 
 
                   ],

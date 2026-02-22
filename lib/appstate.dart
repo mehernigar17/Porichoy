@@ -4,6 +4,7 @@ class Appstate  extends ChangeNotifier{
   bool _isBangla=false;
   bool  get isDark=> _isDark;
   bool get isBangla=>_isBangla;
+
   void setDark(bool value){
     _isDark=value;
     notifyListeners();

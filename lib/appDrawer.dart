@@ -1,10 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'appstate.dart';
 import 'setting.dart';
 import 'profile.dart';
+import 'complainbox.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -21,12 +21,12 @@ class AppDrawer extends StatelessWidget {
                 const SizedBox(height: 80),
 
                 Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: InkWell(
                     onTap: (){
                       Navigator.pop(context);
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Profile()),
+                        MaterialPageRoute(builder: (context) => Profile()),
                       );
                     },
                     child: Column(
@@ -67,9 +67,18 @@ class AppDrawer extends StatelessWidget {
                   icon: Icons.report_problem,
                   title: appState.isBangla ? "অভিযোগ" : "Complain",
                   context: context,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                     MaterialPageRoute(
+                        builder:(context)=>Complainbox(),
+                      ),
+                    );
+                  },
                   appState: appState,
                 ),
+
+
 
                 const SizedBox(height: 12),
 
