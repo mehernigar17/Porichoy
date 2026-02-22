@@ -25,8 +25,6 @@ class _PassportAppliPageState extends State<PassportAppliPage> {
 
   }){
 
-
-
       final appState = Provider.of<Appstate>(context);
       bool isDark = appState.isDark;
       bool  isBangla= appState.isBangla;
@@ -116,13 +114,6 @@ class _PassportAppliPageState extends State<PassportAppliPage> {
 
         ],
       );
-
-
-
-
-
-
-
   }
   @override
   Widget build(BuildContext context) {
@@ -192,10 +183,6 @@ class _PassportAppliPageState extends State<PassportAppliPage> {
         padding: const EdgeInsets.fromLTRB(16, 150, 16, 16),
 
         child: Column(
-
-
-
-
             children: [
 
         Text(isBangla?
@@ -211,16 +198,6 @@ class _PassportAppliPageState extends State<PassportAppliPage> {
 
         ),
         const SizedBox(height: 40),
-
-
-
-
-
-
-
-
-
-
 
           ...List.generate(cardData.length, (index) {
             const SizedBox(height: 20);
@@ -242,8 +219,6 @@ class _PassportAppliPageState extends State<PassportAppliPage> {
               ],
             );
           }),
-
-
 
               const SizedBox(height: 38),
 
@@ -293,15 +268,7 @@ class _PassportAppliPageState extends State<PassportAppliPage> {
 
               const SizedBox(height: 40),
 
-
-
-
-
-
-
-
-
-      ]
+            ]
        ),
       ),
       )

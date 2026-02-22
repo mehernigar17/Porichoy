@@ -18,16 +18,15 @@ class Profile extends StatelessWidget {
           backgroundColor: scaffoldBg,
           appBar: AppBar(
             title: Text(appState.isBangla? "প্রোফাইল" : "Profile"),
-            elevation: 0,
-            backgroundColor: Colors.transparent,
             foregroundColor: textColor,
+           // backgroundColor: brandColor,
             leading: IconButton(
               onPressed: () => Navigator.of(context).pop(),
               icon: const Icon(Icons.arrow_back),
             ),
           ),
-          body: SingleChildScrollView(           ////why
-            padding: const EdgeInsets.all(20.0),     ////why
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
 

@@ -1,8 +1,3 @@
-
-
-
-
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -33,17 +28,11 @@ class _FormFillPageState extends State<FormFillPage> {
   final religion=TextEditingController();
   final birthPlace=TextEditingController();
 
-
-
-
   final perVillage=TextEditingController();
   final perPost=TextEditingController();
   final perThana=TextEditingController();
   final perDistrict=TextEditingController();
   final perDivision=TextEditingController();
-
-
-
 
   final preVillage=TextEditingController();
   final prePost=TextEditingController();
@@ -51,22 +40,13 @@ class _FormFillPageState extends State<FormFillPage> {
   final preDistrict=TextEditingController();
   final preDivision=TextEditingController();
 
-
-
-
-
-
   final guardianName=TextEditingController();
   final guardianNid=TextEditingController();
   final guardianPhone=TextEditingController();
 
-
-
   final mobile=TextEditingController();
   final altMobile=TextEditingController();
   final email=TextEditingController();
-
-
 
   String gender="Male";
   String maritalStatus="Single";
@@ -86,9 +66,6 @@ class _FormFillPageState extends State<FormFillPage> {
       child: TextFormField(
         controller: controller,
         validator: (value)=> value == null || value.isEmpty ? "Required" : null,
-        //style: TextStyle(
-         // color: isDark?Colors.white:  Color(0xFF0F7A4F),
-        //),
         decoration: InputDecoration(
           labelText: label,
             labelStyle: TextStyle(
@@ -112,15 +89,9 @@ class _FormFillPageState extends State<FormFillPage> {
             borderSide: BorderSide(color: Colors.green, width: 2),
           )
         ),
-
       ),
-
-
-
     );
   }
-
-
 
 Widget dropdown(String label,String value,List <String> items,Function(String?)onChanged, {bool isDark = false}){
 
@@ -130,8 +101,6 @@ Widget dropdown(String label,String value,List <String> items,Function(String?)o
         value: item,
           child:Text(item),
       ));
-
-
     }
     return Padding(padding:
     EdgeInsets.symmetric(vertical: 6) ,
@@ -169,17 +138,11 @@ Widget dropdown(String label,String value,List <String> items,Function(String?)o
             )
         ),
 
-
-
-
    ),
 
     );
 
 }
-
-
-
 
 Widget  sectionTitle(String text){
     return Container(
@@ -215,7 +178,6 @@ Widget  sectionTitle(String text){
     );
 }
 
-
 Future <void> pickDate()async{
     DateTime?picked=await showDatePicker(context: context,
         firstDate: DateTime(1944),
@@ -237,36 +199,14 @@ Future <void> pickDate()async{
         
 }
 
-
-
 void submit (){
 if(formkey.currentState!.validate()){
 
 ScaffoldMessenger.of(context).showSnackBar(
   const SnackBar(content: Text("Form validated successfully!"),)
 );
-
-
-  
 }
-
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -291,10 +231,7 @@ ScaffoldMessenger.of(context).showSnackBar(
               color: Colors.white
 
           ),
-
         ),
-
-
       ) ,
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
@@ -451,8 +388,6 @@ ScaffoldMessenger.of(context).showSnackBar(
                 ),
               ),
 
-
-
               SizedBox(height: 20),
 
               SizedBox(
@@ -484,9 +419,6 @@ ScaffoldMessenger.of(context).showSnackBar(
               ),
 
               SizedBox(height: 30),
-
-
-
             ],
             
     )
