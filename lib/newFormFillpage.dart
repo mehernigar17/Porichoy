@@ -451,7 +451,7 @@ class _NFormFillPageState extends State<NewFormFillPage> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.camera_alt, size: 40, color: Colors.green),
+                            Icon(Icons.edit, size: 40, color: Colors.green),
                             SizedBox(height: 8),
                              Text(isBangla ? "নতুন পাসপোর্টের জন্য ছবি আপলোড করুন"
                                 : "Upload recent passport photo for renewal"),

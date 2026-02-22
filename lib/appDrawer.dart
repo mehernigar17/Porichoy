@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'appstate.dart';
 import 'setting.dart';
+import 'profile.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -13,48 +14,79 @@ class AppDrawer extends StatelessWidget {
     return Consumer<Appstate>(
       builder: (context, appState, _) {
         return Drawer(
-          backgroundColor: appState.isDark ? Colors.grey[900] : const Color(0xffeefaf6),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20),
+            backgroundColor: appState.isDark ? Colors.grey[900] : const Color(0xffeefaf6),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 80),
 
-              drawerItem(
-                icon: Icons.bar_chart,
-                title: appState.isBangla ? "প্রগেস" : "Progress",
-                context: context,
-                onTap: () {},
-                appState: appState,
-              ),
+                Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.pop(context);
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Profile()),
+                      );
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const CircleAvatar(
+                          radius: 30,
+                          backgroundColor: Color(0xFF0F7A4F),
+                          child: Icon(Icons.person, size: 40, color: Colors.white),
+                        ),
+                        const SizedBox(height: 20),
+                        Text(
+                          appState.isBangla ? "আরিয়ার নাওয়ার " : "Ariyer Nawer",
+                          style: GoogleFonts.hindSiliguri(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: appState.isDark ? Colors.white : Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
 
-              const SizedBox(height: 12),
+                const Spacer(),
 
-              drawerItem(
-                icon: Icons.report_problem,
-                title: appState.isBangla ? "অভিযোগ" : "Complain",
-                context: context,
-                onTap: () {},
-                appState: appState,
-              ),
+                drawerItem(
+                  icon: Icons.bar_chart,
+                  title: appState.isBangla ? "প্রগেস" : "Progress",
+                  context: context,
+                  onTap: () {},
+                  appState: appState,
+                ),
 
-              const SizedBox(height: 12),
+                const SizedBox(height: 12),
 
-              drawerItem(
-                icon: Icons.settings,
-                title: appState.isBangla ? "সেটিংস" : "Settings",
-                context: context,
-                onTap: () {
-                  Navigator.pop(context);
-                  //SettingsBottom.show(context);
-                  SettingsBottomSheet.show(context);
-                },
-                appState: appState,
-              ),
+                drawerItem(
+                  icon: Icons.report_problem,
+                  title: appState.isBangla ? "অভিযোগ" : "Complain",
+                  context: context,
+                  onTap: () {},
+                  appState: appState,
+                ),
 
-              const SizedBox(height: 20),
-            ],
-          ),
+                const SizedBox(height: 12),
+
+                drawerItem(
+                  icon: Icons.settings,
+                  title: appState.isBangla ? "সেটিংস" : "Settings",
+                  context: context,
+                  onTap: () {
+                    Navigator.pop(context);
+                    SettingsBottomSheet.show(context);
+                  },
+                  appState: appState,
+                ),
+
+                const SizedBox(height: 20),
+              ],
+            )
         );
       },
     );

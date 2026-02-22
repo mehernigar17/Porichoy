@@ -443,7 +443,7 @@ ScaffoldMessenger.of(context).showSnackBar(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.camera_alt, size: 40, color: Colors.green),
+                      Icon(Icons.edit, size: 40, color: Colors.green),
                       SizedBox(height: 8),
                       Text(isBangla ? "ছবি আপলোড করুন" : "upload picture here"),
                     ],
