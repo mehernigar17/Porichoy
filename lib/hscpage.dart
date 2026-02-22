@@ -205,7 +205,7 @@ class _HscpageState extends State<Hscpage> {
                 children: [
 
                   Text(isBangla?
-                  "পাসপোর্ট আবেদন সংক্রান্ত তথ্য": "Passport Application Information",
+                  "এইচএসসি  আবেদন সংক্রান্ত তথ্য": "Hsc Application Information",
                       textAlign: TextAlign.center,
                       style:isBangla?GoogleFonts.hindSiliguri(  fontSize: 20,
                           fontWeight: FontWeight.bold,
