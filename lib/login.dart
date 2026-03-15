@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,8 +14,49 @@ class login extends StatefulWidget {
   State<login> createState() => _loginState();
 }
 class _loginState extends State<login> {
+
+  //controller
   var numberText=TextEditingController();
   var passText=TextEditingController();
+
+  Future<void> loginUser() async {
+    if (numberText.text.trim().isEmpty || passText.text.trim().isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Please enter your login info"),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    try {
+
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: "${numberText.text.trim()}@myapp.com",
+        password: passText.text.trim(),
+      );
+
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const homepage()),
+      );
+    } on FirebaseAuthException catch (e) {
+      String errorMessage = "Login Failed";
+
+      if (e.code == 'user-not-found') {
+        errorMessage = "No user found with this number.";
+      } else if (e.code == 'wrong-password') {
+        errorMessage = "Incorrect password.";
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(errorMessage), backgroundColor: Colors.red),
+      );
+    }
+  }
+
   bool  _obsecureText =true;
   @override
   Widget build(BuildContext context) {
@@ -147,33 +189,27 @@ class _loginState extends State<login> {
               Container(height: 20,),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 100),
-                child: ElevatedButton(
-                  onPressed:(){
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder:(context)=>homepage(),
-                        ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF0F7A4F),
-                      minimumSize: Size(400, 50)
+                  child: ElevatedButton(
+                    onPressed:loginUser,
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF0F7A4F),
+                        minimumSize: Size(400, 50)
+                    ),
+                    child:Text(context.watch<Appstate>().isBangla
+                      ?"লগইন "
+                      :"Login",
+                      style: context.watch<Appstate>().isBangla
+                          ? GoogleFonts.hindSiliguri(
+                          color:Colors.white,
+                          fontSize: 16,
+                          fontWeight:FontWeight.w600 )
+                          :GoogleFonts.poppins(
+                          color:Colors.white,
+                          fontSize: 16,
+                          fontWeight:FontWeight.w600) ,
+                    ),
                   ),
-                  child:Text(context.watch<Appstate>().isBangla
-                    ?"লগইন "
-                    :"Login",
-                    style: context.watch<Appstate>().isBangla
-                        ? GoogleFonts.hindSiliguri(
-                        color:Colors.white,
-                        fontSize: 16,
-                        fontWeight:FontWeight.w600 )
-                        :GoogleFonts.poppins(
-                        color:Colors.white,
-                        fontSize: 16,
-                        fontWeight:FontWeight.w600) ,
-                  ),
-                ),
+
               ),
               Container(height:180,),
               Column(

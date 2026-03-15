@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:porichoy/homepage.dart';
@@ -11,11 +12,47 @@ class signup extends StatefulWidget {
 
   @override
   State<signup> createState() => _signupState();
+
 }
 
 class _signupState extends State<signup> {
+
   var numberText=TextEditingController();
   var passText=TextEditingController();
+  var confirmPassText = TextEditingController();
+
+  Future<void> registerUser() async {
+    if (numberText.text.isEmpty || passText.text.isEmpty || confirmPassText.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Please enter all information"), backgroundColor: Colors.red),
+      );
+      return;
+    }
+
+    if (passText.text != confirmPassText.text) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Passwords do not match!"), backgroundColor: Colors.orange),
+      );
+      return;
+    }
+
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: "${numberText.text.trim()}@myapp.com",
+        password: passText.text.trim(),
+      );
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const homepage()),
+      );
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.message ?? "Registration Failed")),
+      );
+    }
+  }
+
   bool  _obsecureText =true;
   @override
   Widget build(BuildContext context) {
@@ -150,6 +187,7 @@ class _signupState extends State<signup> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: TextFormField(
                   obscureText: _obsecureText,
+                  controller: confirmPassText,
                   decoration: InputDecoration(
                       labelText: context.watch<Appstate>().isBangla
                           ?" পাসওয়ার্ড নিশ্চিত করুন "
@@ -204,14 +242,7 @@ class _signupState extends State<signup> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 100),
                 child: ElevatedButton(
-                  onPressed:(){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder:(context)=>homepage(),
-                      ),
-                    );
-                  },
+                  onPressed:registerUser,
                   style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF0F7A4F),
                       minimumSize: Size(400, 50)
@@ -233,7 +264,7 @@ class _signupState extends State<signup> {
               ),
               Container(height:130,),
               Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(context.watch<Appstate>().isBangla
                       ?"ইতিমধ্যে একটি অ্যাকাউন্ট আছে?"
