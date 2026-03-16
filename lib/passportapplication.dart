@@ -16,6 +16,26 @@ class PassportAppliPage extends StatefulWidget {
 class _PassportAppliPageState extends State<PassportAppliPage> {
 
   List <bool> isExpandedList=[false,false,false,false];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   List<bool> isHoveredList = [false, false, false, false];
   Widget buildCard({
     required int index,

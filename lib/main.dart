@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:porichoy/homepage.dart';
+import 'package:porichoy/splash.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
@@ -32,7 +34,11 @@ class MyApp extends StatelessWidget {
       builder: (context, appState, _) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          themeMode: appState.isDark ? ThemeMode.dark : ThemeMode.light,
+
+
+          themeMode:
+          appState.isDark ? ThemeMode.dark : ThemeMode.light,
+
           theme: ThemeData(
             brightness: Brightness.light,
             primarySwatch: Colors.green,
@@ -42,6 +48,7 @@ class MyApp extends StatelessWidget {
               backgroundColor: Colors.white,
             ),
           ),
+
           darkTheme: ThemeData(
             brightness: Brightness.dark,
             scaffoldBackgroundColor: Colors.grey[900],
@@ -55,7 +62,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
 
-          home: const splash(),
+          home: splash(),
         );
       },
     );
