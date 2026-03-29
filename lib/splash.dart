@@ -17,7 +17,6 @@ class _splashState extends State<splash> with TickerProviderStateMixin{
   late AnimationController _zoomController;
 
   late Animation<double> _zoomAnimation;
-  late Animation<double> _textAnimation;
 
   final Color bg = Color(0xFFF5F5F5);
   final Color textColor = Color(0xFF1A1A1A);
@@ -31,7 +30,7 @@ class _splashState extends State<splash> with TickerProviderStateMixin{
       if(mounted){
         Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (_) => const login()) //change placeholder to where i wanna route(login)
+            MaterialPageRoute(builder: (_) => const login())
         );
 
       }

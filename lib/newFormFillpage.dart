@@ -213,7 +213,7 @@ class _NFormFillPageState extends State<NewFormFillPage> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 6),
       child: DropdownButtonFormField<String>(
-        value: value,
+           value: value,
         items: menuItems,
         onChanged: onChanged,
         decoration: InputDecoration(

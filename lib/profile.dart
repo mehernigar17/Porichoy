@@ -19,7 +19,6 @@ class Profile extends StatelessWidget {
           appBar: AppBar(
             title: Text(appState.isBangla? "প্রোফাইল" : "Profile"),
             foregroundColor: textColor,
-           // backgroundColor: brandColor,
             leading: IconButton(
               onPressed: () => Navigator.of(context).pop(),
               icon: const Icon(Icons.arrow_back),

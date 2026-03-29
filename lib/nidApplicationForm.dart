@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +14,6 @@ class NidApplicationForm extends StatefulWidget {
 
 class _NidApplicationFormState extends State<NidApplicationForm> {
   final formkey = GlobalKey<FormState>();
-
 
   final fullNameBn = TextEditingController();
   final fullNameEn = TextEditingController();
@@ -41,11 +42,64 @@ class _NidApplicationFormState extends State<NidApplicationForm> {
   String maritalStatus = "Single";
   bool sameAddress = false;
 
-  Widget field(String label, TextEditingController controller, bool isDark) {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final appState = Provider.of<Appstate>(context, listen: false);
+      final user = FirebaseAuth.instance.currentUser;
+
+      if (user != null) {
+        try {
+          var doc = await FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .collection('drafts')
+              .doc('nid_application')
+              .get();
+
+          if (doc.exists && doc.data() != null) {
+            var data = doc.data()!;
+            setState(() {
+              fullNameBn.text = data['fullNameBn'] ?? "";
+              fullNameEn.text = data['fullNameEn'] ?? "";
+              fatherName.text = data['fatherName'] ?? "";
+              motherName.text = data['motherName'] ?? "";
+              dateBirth.text = data['dateBirth'] ?? "";
+              birthReg.text = data['birthReg'] ?? "";
+              religion.text = data['religion'] ?? "";
+              birthPlace.text = data['birthPlace'] ?? "";
+              bloodGroup.text = data['bloodGroup'] ?? "";
+              perVillage.text = data['perVillage'] ?? "";
+              perPost.text = data['perPost'] ?? "";
+              perThana.text = data['perThana'] ?? "";
+              perDistrict.text = data['perDistrict'] ?? "";
+              preVillage.text = data['preVillage'] ?? "";
+              prePost.text = data['prePost'] ?? "";
+              preThana.text = data['preThana'] ?? "";
+              preDistrict.text = data['preDistrict'] ?? "";
+              mobile.text = data['mobile'] ?? "";
+              email.text = data['email'] ?? "";
+              gender = data['gender'] ?? "Male";
+              maritalStatus = data['maritalStatus'] ?? "Single";
+              sameAddress = data['sameAddress'] ?? false;
+            });
+            appState.nidFormData = Map<String, dynamic>.from(data);
+          }
+        } catch (e) {
+          print("Error loading data: $e");
+        }
+        appState.enableSync();
+      }
+    });
+  }
+
+  Widget field(String label, String dbKey, TextEditingController controller, bool isDark, Appstate appState) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 7),
       child: TextFormField(
         controller: controller,
+        onChanged: (value) => appState.updateNidForm(dbKey, value),
         style: TextStyle(color: isDark ? Colors.white : Colors.black),
         validator: (value) => value == null || value.isEmpty ? "Required" : null,
         decoration: InputDecoration(
@@ -66,7 +120,7 @@ class _NidApplicationFormState extends State<NidApplicationForm> {
     );
   }
 
-  Widget dropdown(String label, String value, List<String> items, Function(String?) onChanged, {bool isDark = false}) {
+  Widget dropdown(String label, String dbKey, String value, List<String> items, Function(String?) onChanged, Appstate appState, {bool isDark = false}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: DropdownButtonFormField<String>(
@@ -74,7 +128,10 @@ class _NidApplicationFormState extends State<NidApplicationForm> {
         dropdownColor: isDark ? Colors.grey[900] : Colors.white,
         style: TextStyle(color: isDark ? Colors.white : Colors.black),
         items: items.map((item) => DropdownMenuItem(value: item, child: Text(item))).toList(),
-        onChanged: onChanged,
+        onChanged: (val) {
+          onChanged(val);
+          if (val != null) appState.updateNidForm(dbKey, val);
+        },
         decoration: InputDecoration(
           labelText: label,
           labelStyle: TextStyle(
@@ -110,7 +167,7 @@ class _NidApplicationFormState extends State<NidApplicationForm> {
     );
   }
 
-  Future<void> pickDate() async {
+  Future<void> pickDate(Appstate appState) async {
     DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime(2000),
@@ -118,17 +175,11 @@ class _NidApplicationFormState extends State<NidApplicationForm> {
       lastDate: DateTime.now(),
     );
     if (picked != null) {
+      String dateStr = "${picked.day}/${picked.month}/${picked.year}";
       setState(() {
-        dateBirth.text = "${picked.day}/${picked.month}/${picked.year}";
+        dateBirth.text = dateStr;
       });
-    }
-  }
-
-  void submit() {
-    if (formkey.currentState!.validate()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("NID Application Submitted")),
-      );
+      appState.updateNidForm("dateBirth", dateStr);
     }
   }
 
@@ -155,53 +206,52 @@ class _NidApplicationFormState extends State<NidApplicationForm> {
           child: Column(
             children: [
               sectionTitle(isBangla ? "ব্যক্তিগত তথ্য" : "Personal Information", isBangla),
-              field(isBangla ? "নাম (বাংলা)" : "Name (Bangla)", fullNameBn, isDark),
-              field(isBangla ? "নাম (ইংরেজি)" : "Name (English)", fullNameEn, isDark),
-              field(isBangla ? "পিতার নাম" : "Father's Name", fatherName, isDark),
-              field(isBangla ? "মাতার নাম" : "Mother's Name", motherName, isDark),
-
+              field(isBangla ? "নাম (বাংলা)" : "Name (Bangla)", "fullNameBn", fullNameBn, isDark, appState),
+              field(isBangla ? "নাম (ইংরেজি)" : "Name (English)", "fullNameEn", fullNameEn, isDark, appState),
+              field(isBangla ? "পিতার নাম" : "Father's Name", "fatherName", fatherName, isDark, appState),
+              field(isBangla ? "মাতার নাম" : "Mother's Name", "motherName", motherName, isDark, appState),
               GestureDetector(
-                onTap: pickDate,
+                onTap: () => pickDate(appState),
                 child: AbsorbPointer(
-                  child: field(isBangla ? "জন্ম তারিখ" : "Date of Birth", dateBirth, isDark),
+                  child: field(isBangla ? "জন্ম তারিখ" : "Date of Birth", "dateBirth", dateBirth, isDark, appState),
                 ),
               ),
-
-              field(isBangla ? "জন্ম নিবন্ধন নম্বর" : "Birth Registration No", birthReg, isDark),
-              field(isBangla ? "রক্তের গ্রুপ" : "Blood Group", bloodGroup, isDark),
-
-              dropdown(isBangla ? "লিঙ্গ" : "Gender", gender, ["Male", "Female", "Others"], (val) => setState(() => gender = val!), isDark: isDark),
-              dropdown(isBangla ? "বৈবাহিক অবস্থা" : "Marital Status", maritalStatus, ["Single", "Married", "Widowed"], (val) => setState(() => maritalStatus = val!), isDark: isDark),
-
+              field(isBangla ? "জন্ম নিবন্ধন নম্বর" : "Birth Registration No", "birthReg", birthReg, isDark, appState),
+              field(isBangla ? "রক্তের গ্রুপ" : "Blood Group", "bloodGroup", bloodGroup, isDark, appState),
+              dropdown(isBangla ? "লিঙ্গ" : "Gender", "gender", gender, ["Male", "Female", "Others"], (val) => setState(() => gender = val!), appState, isDark: isDark),
+              dropdown(isBangla ? "বৈবাহিক অবস্থা" : "Marital Status", "maritalStatus", maritalStatus, ["Single", "Married", "Widowed"], (val) => setState(() => maritalStatus = val!), appState, isDark: isDark),
               sectionTitle(isBangla ? "ঠিকানা" : "Address", isBangla),
-              field(isBangla ? "স্থায়ী গ্রাম/রাস্তা" : "Permanent Village/Road", perVillage, isDark),
-              field(isBangla ? "স্থায়ী জেলা" : "Permanent District", perDistrict, isDark),
-
+              field(isBangla ? "স্থায়ী গ্রাম/রাস্তা" : "Permanent Village/Road", "perVillage", perVillage, isDark, appState),
+              field(isBangla ? "স্থায়ী জেলা" : "Permanent District", "perDistrict", perDistrict, isDark, appState),
               CheckboxListTile(
                 value: sameAddress,
-                onChanged: (val) => setState(() => sameAddress = val!),
+                onChanged: (val) {
+                  setState(() => sameAddress = val!);
+                  appState.updateNidForm("sameAddress", val.toString());
+                },
                 title: Text(
                   isBangla ? "বর্তমান ও স্থায়ী ঠিকানা একই" : "Present address same as permanent",
                   style: TextStyle(color: isDark ? Colors.white : Colors.black),
                 ),
                 activeColor: const Color(0xFF0F7A4F),
               ),
-
               if (!sameAddress) ...[
-                field(isBangla ? "বর্তমান গ্রাম/রাস্তা" : "Present Village/Road", preVillage, isDark),
-                field(isBangla ? "বর্তমান জেলা" : "Present District", preDistrict, isDark),
+                field(isBangla ? "বর্তমান গ্রাম/রাস্তা" : "Present Village/Road", "preVillage", preVillage, isDark, appState),
+                field(isBangla ? "বর্তমান জেলা" : "Present District", "preDistrict", preDistrict, isDark, appState),
               ],
-
               sectionTitle(isBangla ? "যোগাযোগ" : "Contact", isBangla),
-              field(isBangla ? "মোবাইল নম্বর" : "Mobile Number", mobile, isDark),
-              field(isBangla ? "ইমেইল" : "Email", email, isDark),
-
+              field(isBangla ? "মোবাইল নম্বর" : "Mobile Number", "mobile", mobile, isDark, appState),
+              field(isBangla ? "ইমেইল" : "Email", "email", email, isDark, appState),
               const SizedBox(height: 30),
               SizedBox(
                 width: double.infinity,
                 height: 55,
                 child: ElevatedButton(
-                  onPressed: submit,
+                  onPressed: () {
+                    if (formkey.currentState!.validate()) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Application Submitted Successfully")));
+                    }
+                  },
                   style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF0F7A4F)),
                   child: Text(
                     isBangla ? "জমা দিন" : "Submit Application",
@@ -217,4 +267,3 @@ class _NidApplicationFormState extends State<NidApplicationForm> {
     );
   }
 }
-
