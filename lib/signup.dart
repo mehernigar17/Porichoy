@@ -12,17 +12,17 @@ class signup extends StatefulWidget {
 
   @override
   State<signup> createState() => _signupState();
-
 }
 
 class _signupState extends State<signup> {
 
-  var numberText=TextEditingController();
-  var passText=TextEditingController();
+  var nameText = TextEditingController();
+  var numberText = TextEditingController();
+  var passText = TextEditingController();
   var confirmPassText = TextEditingController();
 
   Future<void> registerUser() async {
-    if (numberText.text.isEmpty || passText.text.isEmpty || confirmPassText.text.isEmpty) {
+    if (nameText.text.isEmpty || numberText.text.isEmpty || passText.text.isEmpty || confirmPassText.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Please enter all information"), backgroundColor: Colors.red),
       );
@@ -37,10 +37,12 @@ class _signupState extends State<signup> {
     }
 
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: "${numberText.text.trim()}@myapp.com",
         password: passText.text.trim(),
       );
+
+      await credential.user!.updateDisplayName(nameText.text.trim());
 
       Navigator.pushReplacement(
         context,
@@ -53,7 +55,8 @@ class _signupState extends State<signup> {
     }
   }
 
-  bool  _obsecureText =true;
+  bool _obsecureText = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,247 +65,204 @@ class _signupState extends State<signup> {
         backgroundColor: Colors.white,
         actions: [
           IconButton(
-              onPressed: (){
-                final appstate=context.read<Appstate>();
-                appstate.setLanguage(!appstate.isBangla);
-              },
-              icon: Icon(Icons.language,color:const Color(0xFF0F7A4F))
+            onPressed: () {
+              final appstate = context.read<Appstate>();
+              appstate.setLanguage(!appstate.isBangla);
+            },
+            icon: Icon(Icons.language, color: const Color(0xFF0F7A4F)),
           )
         ],
       ),
       body: SafeArea(
-        child:SingleChildScrollView(
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                child: Image.asset('assets/pictures/porichoy.png'),
                 height: 200,
                 width: 200,
+                child: Image.asset('assets/pictures/porichoy.png'),
               ),
-              Container(height: 20,),
+              Container(height: 20),
+
+              // Name field
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal:20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextFormField(
+                  controller: nameText,
+                  decoration: InputDecoration(
+                    labelText: context.watch<Appstate>().isBangla ? "নাম" : 'Full Name',
+                    hintText: context.watch<Appstate>().isBangla ? "আপনার নাম লিখুন" : 'Enter your name',
+                    hintStyle: context.watch<Appstate>().isBangla
+                        ? GoogleFonts.hindSiliguri(color: const Color(0xFF0F7A4F), fontWeight: FontWeight.w500)
+                        : GoogleFonts.poppins(color: const Color(0xFF0F7A4F)),
+                    labelStyle: context.watch<Appstate>().isBangla
+                        ? GoogleFonts.hindSiliguri(color: const Color(0xFF0F7A4F), fontWeight: FontWeight.w500)
+                        : GoogleFonts.poppins(color: const Color(0xFF0F7A4F)),
+                    prefixIcon: const Icon(Icons.person, color: Color(0xFF0F7A4F)),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(11),
+                      borderSide: BorderSide(color: Colors.lightGreen.shade700, width: 2),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(11),
+                      borderSide: const BorderSide(color: Color(0xFF0F7A4F), width: 2),
+                    ),
+                  ),
+                ),
+              ),
+              Container(height: 23),
+
+              // Phone number field
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: TextFormField(
                   keyboardType: TextInputType.numberWithOptions(),
                   controller: numberText,
                   decoration: InputDecoration(
-                    labelText: context.watch<Appstate>().isBangla
-                        ?"মোবাইল নম্বর"
-                        :'Mobile Number',
-                    hintText:context.watch<Appstate>().isBangla
-                        ?"মোবাইল নম্বর লিখুন"
-                        :'Enter Mobile Number',
-                    hintStyle:context.watch<Appstate>().isBangla
-                        ? GoogleFonts.hindSiliguri(
-                        color:const Color(0xFF0F7A4F),
-                        fontWeight:FontWeight.w500 )
-                        :GoogleFonts.poppins(
-                      color:const Color(0xFF0F7A4F),) ,
-                    labelStyle:  context.watch<Appstate>().isBangla
-                        ? GoogleFonts.hindSiliguri(
-                        color:const Color(0xFF0F7A4F),
-                        fontWeight:FontWeight.w500 )
-                        :GoogleFonts.poppins(
-                      color:const Color(0xFF0F7A4F),),
-                    prefixIcon: Icon(Icons.phone,color:const Color(0xFF0F7A4F)),
-                    focusedBorder:OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(11),
-                        borderSide: BorderSide(
-                            color: Colors.lightGreen.shade700,
-                            width: 2
-                        )
+                    labelText: context.watch<Appstate>().isBangla ? "মোবাইল নম্বর" : 'Mobile Number',
+                    hintText: context.watch<Appstate>().isBangla ? "মোবাইল নম্বর লিখুন" : 'Enter Mobile Number',
+                    hintStyle: context.watch<Appstate>().isBangla
+                        ? GoogleFonts.hindSiliguri(color: const Color(0xFF0F7A4F), fontWeight: FontWeight.w500)
+                        : GoogleFonts.poppins(color: const Color(0xFF0F7A4F)),
+                    labelStyle: context.watch<Appstate>().isBangla
+                        ? GoogleFonts.hindSiliguri(color: const Color(0xFF0F7A4F), fontWeight: FontWeight.w500)
+                        : GoogleFonts.poppins(color: const Color(0xFF0F7A4F)),
+                    prefixIcon: const Icon(Icons.phone, color: Color(0xFF0F7A4F)),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(11),
+                      borderSide: BorderSide(color: Colors.lightGreen.shade700, width: 2),
                     ),
                     enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(11),
-                        borderSide: BorderSide(
-                            color:const Color(0xFF0F7A4F),
-                            width:2
-                        )
+                      borderRadius: BorderRadius.circular(11),
+                      borderSide: const BorderSide(color: Color(0xFF0F7A4F), width: 2),
                     ),
                   ),
-                  validator: (value){
-                    return value!.isEmpty?'Please Enter Mobile Number':null;
-                  },
                 ),
               ),
-              Container(height: 23,),
+              Container(height: 23),
+
+              // Password field
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: TextFormField(
                   obscureText: _obsecureText,
                   controller: passText,
                   decoration: InputDecoration(
-                      labelText: context.watch<Appstate>().isBangla
-                          ?"নতুন পাসওয়ার্ড "
-                          :'New Password',
-                      hintText:context.watch<Appstate>().isBangla
-                          ?"পাসওয়ার্ড"
-                          :'Password',
-                      hintStyle:context.watch<Appstate>().isBangla
-                          ? GoogleFonts.hindSiliguri(
-                          color:const Color(0xFF0F7A4F),
-                          fontWeight:FontWeight.w500 )
-                          :GoogleFonts.poppins(
-                        color:const Color(0xFF0F7A4F),) ,
-                      labelStyle:  context.watch<Appstate>().isBangla
-                          ? GoogleFonts.hindSiliguri(
-                          color:const Color(0xFF0F7A4F),
-                          fontWeight:FontWeight.w500 )
-                          :GoogleFonts.poppins(
-                        color:const Color(0xFF0F7A4F),),
-                      focusedBorder:OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(11),
-                          borderSide: BorderSide(
-                              color: Colors.lightGreen.shade700,
-                              width: 2
-                          )
+                    labelText: context.watch<Appstate>().isBangla ? "নতুন পাসওয়ার্ড" : 'New Password',
+                    hintText: context.watch<Appstate>().isBangla ? "পাসওয়ার্ড" : 'Password',
+                    hintStyle: context.watch<Appstate>().isBangla
+                        ? GoogleFonts.hindSiliguri(color: const Color(0xFF0F7A4F), fontWeight: FontWeight.w500)
+                        : GoogleFonts.poppins(color: const Color(0xFF0F7A4F)),
+                    labelStyle: context.watch<Appstate>().isBangla
+                        ? GoogleFonts.hindSiliguri(color: const Color(0xFF0F7A4F), fontWeight: FontWeight.w500)
+                        : GoogleFonts.poppins(color: const Color(0xFF0F7A4F)),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(11),
+                      borderSide: BorderSide(color: Colors.lightGreen.shade700, width: 2),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(11),
+                      borderSide: const BorderSide(color: Color(0xFF0F7A4F), width: 2),
+                    ),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _obsecureText = !_obsecureText;
+                        });
+                      },
+                      icon: Icon(
+                        _obsecureText ? Icons.visibility_off : Icons.visibility,
+                        color: const Color(0xFF0F7A4F),
                       ),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(11),
-                          borderSide: BorderSide(
-                              color: const Color(0xFF0F7A4F),
-                              width:2
-                          )
-                      ),
-                      suffixIcon: IconButton(
-                        onPressed:(){
-                          setState(() {
-                            _obsecureText=!_obsecureText;
-                          });
-                        },
-                        icon:Icon(_obsecureText
-                            ? Icons.visibility_off
-                            : Icons.visibility,color:const Color(0xFF0F7A4F)),
-                      )
-
+                    ),
                   ),
-                  validator: (value){
-                    return value!.isEmpty?'Please Enter Password':null;
-                  },
                 ),
               ),
-              Container(height: 20,),
+              Container(height: 20),
+
+              // Confirm password field
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: TextFormField(
                   obscureText: _obsecureText,
                   controller: confirmPassText,
                   decoration: InputDecoration(
-                      labelText: context.watch<Appstate>().isBangla
-                          ?" পাসওয়ার্ড নিশ্চিত করুন "
-                          :'Confirm Password',
-                      hintText:context.watch<Appstate>().isBangla
-                          ?"পাসওয়ার্ড "
-                          :'Confirm Password',
-                      hintStyle:context.watch<Appstate>().isBangla
-                          ? GoogleFonts.hindSiliguri(
-                          color:const Color(0xFF0F7A4F),
-                          fontWeight:FontWeight.w500 )
-                          :GoogleFonts.poppins(
-                        color:const Color(0xFF0F7A4F),) ,
-                      labelStyle:  context.watch<Appstate>().isBangla
-                          ? GoogleFonts.hindSiliguri(
-                          color:const Color(0xFF0F7A4F),
-                          fontWeight:FontWeight.w500 )
-                          :GoogleFonts.poppins(
-                        color:const Color(0xFF0F7A4F),),
-                      focusedBorder:OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(11),
-                          borderSide: BorderSide(
-                              color: Colors.lightGreen.shade700,
-                              width: 2
-                          )
+                    labelText: context.watch<Appstate>().isBangla ? "পাসওয়ার্ড নিশ্চিত করুন" : 'Confirm Password',
+                    hintText: context.watch<Appstate>().isBangla ? "পাসওয়ার্ড" : 'Confirm Password',
+                    hintStyle: context.watch<Appstate>().isBangla
+                        ? GoogleFonts.hindSiliguri(color: const Color(0xFF0F7A4F), fontWeight: FontWeight.w500)
+                        : GoogleFonts.poppins(color: const Color(0xFF0F7A4F)),
+                    labelStyle: context.watch<Appstate>().isBangla
+                        ? GoogleFonts.hindSiliguri(color: const Color(0xFF0F7A4F), fontWeight: FontWeight.w500)
+                        : GoogleFonts.poppins(color: const Color(0xFF0F7A4F)),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(11),
+                      borderSide: BorderSide(color: Colors.lightGreen.shade700, width: 2),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(11),
+                      borderSide: const BorderSide(color: Color(0xFF0F7A4F), width: 2),
+                    ),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _obsecureText = !_obsecureText;
+                        });
+                      },
+                      icon: Icon(
+                        _obsecureText ? Icons.visibility_off : Icons.visibility,
+                        color: const Color(0xFF0F7A4F),
                       ),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(11),
-                          borderSide: BorderSide(
-                              color: const Color(0xFF0F7A4F),
-                              width:2
-                          )
-                      ),
-                      suffixIcon: IconButton(
-                        onPressed:(){
-                          setState(() {
-                            _obsecureText=!_obsecureText;
-                          });
-                        },
-                        icon:Icon(_obsecureText
-                            ? Icons.visibility_off
-                            : Icons.visibility,color:const Color(0xFF0F7A4F)),
-                      )
-
+                    ),
                   ),
-                  validator: (value){
-                    return value!.isEmpty?'Please Enter Password':null;
-                  },
                 ),
               ),
-              Container(height: 20,),
+              Container(height: 20),
+
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 100),
                 child: ElevatedButton(
-                  onPressed:registerUser,
+                  onPressed: registerUser,
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF0F7A4F),
-                      minimumSize: Size(400, 50)
+                    backgroundColor: const Color(0xFF0F7A4F),
+                    minimumSize: const Size(400, 50),
                   ),
-                  child:Text(context.watch<Appstate>().isBangla
-                      ?"সাইন আপ"
-                      :"Sign Up",
+                  child: Text(
+                    context.watch<Appstate>().isBangla ? "সাইন আপ" : "Sign Up",
                     style: context.watch<Appstate>().isBangla
-                        ? GoogleFonts.hindSiliguri(
-                        color:Colors.white,
-                        fontSize: 16,
-                        fontWeight:FontWeight.w600 )
-                        :GoogleFonts.poppins(
-                        color:Colors.white,
-                        fontSize: 16,
-                        fontWeight:FontWeight.w600) ,
+                        ? GoogleFonts.hindSiliguri(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)
+                        : GoogleFonts.poppins(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
-              Container(height:130,),
+              Container(height: 130),
+
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(context.watch<Appstate>().isBangla
-                      ?"ইতিমধ্যে একটি অ্যাকাউন্ট আছে?"
-                      :"Already Have an Account?",
+                  Text(
+                    context.watch<Appstate>().isBangla ? "ইতিমধ্যে একটি অ্যাকাউন্ট আছে?" : "Already Have an Account?",
                     style: context.watch<Appstate>().isBangla
-                        ? GoogleFonts.hindSiliguri(
-                      color:Colors.black,
-                      fontSize: 16,
-                    )
-                        :GoogleFonts.poppins(
-                      color:Colors.black,
-                      fontSize: 16,
-                    ),),
-                  TextButton(onPressed: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder:(context)=>login(),
-                      ),
-                    );
-                  },
-                    child: Text(context.watch<Appstate>().isBangla
-                        ?"লগইন করুন"
-                        :"Login Now",
+                        ? GoogleFonts.hindSiliguri(color: Colors.black, fontSize: 16)
+                        : GoogleFonts.poppins(color: Colors.black, fontSize: 16),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => login()),
+                      );
+                    },
+                    child: Text(
+                      context.watch<Appstate>().isBangla ? "লগইন করুন" : "Login Now",
                       style: context.watch<Appstate>().isBangla
-                          ? GoogleFonts.hindSiliguri(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                        color: const Color(0xFF0F7A4F),
-                      )
-                          :GoogleFonts.poppins(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                        color: const Color(0xFF0F7A4F),
-                      ),),
-                  )
+                          ? GoogleFonts.hindSiliguri(fontWeight: FontWeight.bold, fontSize: 15, color: const Color(0xFF0F7A4F))
+                          : GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 15, color: const Color(0xFF0F7A4F)),
+                    ),
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         ),
@@ -310,4 +270,3 @@ class _signupState extends State<signup> {
     );
   }
 }
-

@@ -28,8 +28,6 @@ class homepage extends StatelessWidget {
         String? firstButtonText,
         String? secondButtonText,
       }
-
-
       ){
     final appState=Provider.of<Appstate>(context,listen: false);
     showGeneralDialog(
@@ -143,34 +141,7 @@ class homepage extends StatelessWidget {
         );
       },
     );
-
-
-
-
-
-
-
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   Widget categoryCard({
     required IconData icon,
@@ -245,12 +216,6 @@ class homepage extends StatelessWidget {
                       ),
                     ),
                   ),
-
-
-
-
-
-
                 ],
               ),
               const SizedBox(height: 12),
@@ -290,11 +255,6 @@ class homepage extends StatelessWidget {
           ),
         )
     );
-
-
-
-
-
   }
 
   @override
@@ -331,14 +291,7 @@ class homepage extends StatelessWidget {
               )
           )
         ],
-
-
-
       ),
-
-
-
-
 
       body: SafeArea(
         child: SingleChildScrollView(
@@ -377,7 +330,7 @@ class homepage extends StatelessWidget {
 
                       subtitle: appstate.isBangla
                           ? "জন্ম নিবন্ধন সনদ"
-                          : "Apply for birth registration",
+                          : "Birth registration and services",
                       cardWidth: cardWidth,
                       isDark: appstate.isDark,
                       isBangla: appstate.isBangla,
@@ -388,13 +341,6 @@ class homepage extends StatelessWidget {
                           const BirthCorrectionPage(),
                         );
                       },
-
-
-
-
-
-
-
                     ),
                     categoryCard(
                         icon: Icons.credit_card,
@@ -421,14 +367,11 @@ class homepage extends StatelessWidget {
                       title:
                       appstate.isBangla ? "পাসপোর্ট" : "Passport",
                       subtitle: appstate.isBangla
-                          ? "পাসপোর্ট আবেদন"
-                          : "Passport application & renewal",
+                          ? "পাসপোর্ট আবেদন ও নবায়ন"
+                          : "Passport application and renewal",
                       cardWidth: cardWidth,
                       isDark: appstate.isDark,
                       isBangla: appstate.isBangla,
-
-
-
 
                       arrowclick: () {
                         showoptionDialougue (
@@ -442,7 +385,7 @@ class homepage extends StatelessWidget {
                     categoryCard(
                       icon: Icons.school,
                       title: appstate.isBangla
-                          ? "এসএসসি / এইচএসসি"
+                          ? "এসএসসি / এইচএসসি সার্টিফিকেট"
                           : "HSC / SSC Certificate",
                       subtitle: appstate.isBangla
                           ? "শিক্ষা সনদ যাচাই"

@@ -205,7 +205,7 @@ class _HscpageState extends State<Hscpage> {
                 children: [
 
                   Text(isBangla?
-                  "এইচএসসি  আবেদন সংক্রান্ত তথ্য": "Hsc Application Information",
+                  "এইচএসসি  আবেদন সংক্রান্ত তথ্য": "HSC Application Information",
                       textAlign: TextAlign.center,
                       style:isBangla?GoogleFonts.hindSiliguri(  fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -217,17 +217,6 @@ class _HscpageState extends State<Hscpage> {
 
                   ),
                   const SizedBox(height: 40),
-
-
-
-
-
-
-
-
-
-
-
                   ...List.generate(cardData.length, (index) {
                     const SizedBox(height: 20);
                     return Column(
@@ -298,15 +287,6 @@ class _HscpageState extends State<Hscpage> {
                   ),
 
                   const SizedBox(height: 40),
-
-
-
-
-
-
-
-
-
                 ]
             ),
           ),

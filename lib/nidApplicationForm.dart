@@ -89,7 +89,7 @@ class _NidApplicationFormState extends State<NidApplicationForm> {
         } catch (e) {
           print("Error loading data: $e");
         }
-        appState.enableSync();
+        appState.enableSync('nid_application');
       }
     });
   }

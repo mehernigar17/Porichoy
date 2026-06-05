@@ -204,7 +204,7 @@ class _SscpageState extends State<Sscpage> {
   children: [
 
   Text(isBangla?
-  " এসএসসি আবেদন সংক্রান্ত তথ্য": "Ssc Application Information",
+  " এসএসসি আবেদন সংক্রান্ত তথ্য": "SSC Application Information",
   textAlign: TextAlign.center,
   style:isBangla?GoogleFonts.hindSiliguri(  fontSize: 20,
   fontWeight: FontWeight.bold,

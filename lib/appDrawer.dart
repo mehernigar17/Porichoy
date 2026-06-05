@@ -5,6 +5,7 @@ import 'appstate.dart';
 import 'setting.dart';
 import 'profile.dart';
 import 'complainbox.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -39,7 +40,7 @@ class AppDrawer extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          appState.isBangla ? "আরিয়ার নাওয়ার " : "Ariyer Nawer",
+                          FirebaseAuth.instance.currentUser?.displayName ?? "User",
                           style: GoogleFonts.hindSiliguri(
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
