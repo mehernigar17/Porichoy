@@ -142,11 +142,17 @@ Secure login system using Firebase Authentication.
 
 # 📷 Screenshots
 
-### Home
+### Authentication
 
-(Add Screenshot)
-
-### Service Details
+<p align="center">
+  <img src="login.jpeg" width="150">
+   <img src="signpage.jpeg" width="150">
+</p>
+###Homepage
+<p align="center">
+  <img src="leadingpage1" width="150">
+  
+</p>
 
 (Add Screenshot)
 
