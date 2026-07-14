@@ -28,7 +28,7 @@ As a result, people spend unnecessary time searching different websites, asking 
 
 **Porichoy** is designed to solve this problem by providing all the essential information in one place through a simple and user-friendly interface. Users can easily find the required documents, application procedures, office information, fees, processing time, and important guidelines for various government services.
 
-# ✨ Features
+#  Features
 
 ## 🏛 Government Service Information
 
@@ -106,7 +106,7 @@ Users can switch between languages anytime for a better experience.
 
 ---
 
-## 🌙 Light & Dark Mode
+## Light & Dark Mode
 
 Personalize the app with:
 
@@ -128,10 +128,6 @@ Secure login system using Firebase Authentication.
 
 ---
 
-## 📂 Saved Applications
-
-Users can view all previously saved or completed application drafts from one place and continue editing whenever needed.
-
 ---
 
 ## 📱 Modern User Experience
@@ -141,7 +137,6 @@ Users can view all previously saved or completed application drafts from one pla
 - Responsive layout
 - Smooth navigation
 - User-friendly experience
-- Beautiful icons and illustrations
 
 ---
 
@@ -171,9 +166,6 @@ Users can view all previously saved or completed application drafts from one pla
 
 - Flutter
 - Dart
-
-## Backend
-
 - Firebase Authentication
 - Cloud Firestore
 
@@ -206,20 +198,14 @@ Users can view all previously saved or completed application drafts from one pla
 # 👨‍💻 Developers
 
 ### Meher Nigar
-
-Frontend Developer
-
 GitHub:
 https://github.com/mehernigar17
-
 LinkedIn:
-(Add your LinkedIn)
+www.linkedin.com/in/meher-nigar-315135388
+### Ariyer Nawar Purnota
 
----
 
-### Team Members
 
-(Add other members)
 
 ---
 
