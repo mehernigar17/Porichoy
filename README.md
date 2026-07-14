@@ -141,6 +141,11 @@ Secure login system using Firebase Authentication.
 ---
 
 # 📷 Screenshots
+## ** Splash Screen**
+<p align="center">
+  <img src="splash.jpeg" width="150">
+  
+</p>
 
 
 ### Authentication
@@ -149,7 +154,8 @@ Secure login system using Firebase Authentication.
   <img src="login.jpeg" width="150">
    <img src="signpage.jpeg" width="150">
 </p>
-## **Homepage**
+
+## ** Homepage**
 <p align="center">
   <img src="leadingpage1.jpeg" width="150">
   
@@ -172,7 +178,13 @@ Secure login system using Firebase Authentication.
 ## **Form Fill-Up**
 <p align="center">
   <img src="formfillup.jpeg" width="150">
-    <img src="necessaryinfo2.jpeg" width="150">
+    <img src="formfill2.jpeg" width="150">
+  
+</p>
+
+## ** Selection**
+<p align="center">
+  <img src="selection.jpeg" width="150">
   
 </p>
 ---
@@ -206,8 +218,6 @@ Secure login system using Firebase Authentication.
 - Appointment reminders
 - Office navigation
 - Offline mode
-- Chat support
-- Push notifications
 - PDF document checklist
 
 ---
@@ -220,7 +230,7 @@ https://github.com/mehernigar17
 LinkedIn:
 www.linkedin.com/in/meher-nigar-315135388
 ### Ariyer Nawar Purnota
-
+### Jannatul Nayem Esha
 
 
 
