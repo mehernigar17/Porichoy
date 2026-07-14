@@ -46,7 +46,6 @@ Each service provides:
 - Step-by-step application process
 - Government fees
 - Processing time
-- Office location
 - Contact information
 - Important instructions before visiting
 
