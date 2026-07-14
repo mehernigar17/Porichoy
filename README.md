@@ -142,28 +142,39 @@ Secure login system using Firebase Authentication.
 
 # 📷 Screenshots
 
+
 ### Authentication
 
 <p align="center">
   <img src="login.jpeg" width="150">
    <img src="signpage.jpeg" width="150">
 </p>
-###Homepage
+## **Homepage**
 <p align="center">
-  <img src="leadingpage1" width="150">
+  <img src="leadingpage1.jpeg" width="150">
   
 </p>
 
-(Add Screenshot)
+## **Necessary Information**
+<p align="center">
+  <img src="necessaryinfo.jpeg" width="150">
+    <img src="necessaryinfo2.jpeg" width="150">
+  
+</p>
 
-### Search
-
-(Add Screenshot)
 
 ### Profile
+<p align="center">
+  <img src="profile.jpeg" width="150">
+  
+</p>
 
-(Add Screenshot)
-
+## **Form Fill-Up**
+<p align="center">
+  <img src="formfillup.jpeg" width="150">
+    <img src="necessaryinfo2.jpeg" width="150">
+  
+</p>
 ---
 
 # 🛠 Tech Stack
