@@ -13,95 +13,135 @@ A modern Flutter application that simplifies government services for citizens by
 
 ## 📌 Overview
 
-Many citizens struggle to understand government procedures because information is scattered across different websites and often written in complex language.
+Many people in Bangladesh face difficulties when applying for essential government services such as a National ID (NID), Passport, Birth Certificate, SSC/HSC Certificate.
 
-**Porichoy** brings everything together in one place with a simple, user-friendly interface that helps users understand:
+They often don't know:
 
-- Required documents
-- Application procedures
-- Fees
-- Processing time
-- Office locations
-- Eligibility requirements
+- Which office they need to visit
+- Which authority they should contact
+- What documents are required
+- How much the application will cost
+- How long the process will take
+- What steps they need to follow
 
-The goal is to reduce confusion, save time, and make government services more accessible.
+As a result, people spend unnecessary time searching different websites, asking others for information, or visiting government offices without proper preparation.
 
----
+**Porichoy** is designed to solve this problem by providing all the essential information in one place through a simple and user-friendly interface. Users can easily find the required documents, application procedures, office information, fees, processing time, and important guidelines for various government services.
 
 # ✨ Features
 
-## 📄 Government Service Guide
+## 🏛 Government Service Information
+
+Access complete information for various government services, including:
 
 - National ID (NID)
-- Birth Registration
 - Passport
-- Driving License
-- Trade License
-- Tax Identification Number (TIN)
-- Marriage Registration
-- Police Clearance
-- And more...
+- Birth Registration
+- SSC/HSC Certificate.
 
----
+Each service provides:
 
-## 📚 Step-by-Step Instructions
-
-Every service includes:
-
-- Eligibility requirements
 - Required documents
-- Application process
+- Eligibility requirements
+- Step-by-step application process
 - Government fees
-- Estimated processing time
-- Important notes
+- Processing time
+- Office location
+- Contact information
+- Important instructions before visiting
 
 ---
 
-## 🔍 Smart Search
+##  Smart Form Filling
 
-- Search services instantly
-- Filter by category
-- Easy navigation
+Users can complete government-related forms directly within the app.
+
+Features include:
+
+- Easy-to-fill digital forms
+- Auto-save progress while filling
+- Resume incomplete forms anytime
+
+
+## 💾 Auto Save Drafts
+
+Never lose your progress.
+
+If a user closes the app or leaves before completing a form, all entered information is automatically saved locally. Users can continue exactly where they left off.
+
+## ❓ FAQ & Help Center
+
+A dedicated help page containing answers to frequently asked questions, such as:
+
+- Which office should I visit?
+- What documents are required?
+- What should I bring with me?
+- Who should I contact?
+- How much will it cost?
+- How long does the process take?
+
+This helps users understand the process before visiting any government office.
 
 ---
 
-## ❤️ Favorite Services
+## 📢 Complaint & Feedback System
 
-- Bookmark frequently used services
-- Quick access from home screen
+Users can report issues related to government services, including:
+
+- Bribery or illegal money requests
+- Staff misconduct
+- Service-related problems
+- Other complaints and suggestions
+
+Complaints can be submitted directly through the app for further review.
 
 ---
 
-## 🌐 Language Support
+## 🌐 Bilingual Support
 
 - English
 - বাংলা
 
----
-
-## 📍 Office Information
-
-- Government office details
-- Contact information
-- Office locations
+Users can switch between languages anytime for a better experience.
 
 ---
 
-## 🔔 Latest Notices
+## 🌙 Light & Dark Mode
 
-- Government announcements
-- Important updates
-- Service notifications
+Personalize the app with:
+
+- Light Mode
+- Dark Mode
+
+The selected theme is remembered for future sessions.
 
 ---
 
-## 📱 Modern UI
+## 🔐 User Authentication
+
+Secure login system using Firebase Authentication.
+
+- Sign Up
+- Login
+- Logout
+- Secure access to saved forms and preferences
+
+---
+
+## 📂 Saved Applications
+
+Users can view all previously saved or completed application drafts from one place and continue editing whenever needed.
+
+---
+
+## 📱 Modern User Experience
 
 - Material 3 Design
-- Responsive Layout
-- Clean Interface
-- Smooth Navigation
-- Beautiful Icons
+- Clean and intuitive interface
+- Responsive layout
+- Smooth navigation
+- User-friendly experience
+- Beautiful icons and illustrations
 
 ---
 
@@ -148,47 +188,6 @@ Every service includes:
 
 ---
 
-# 🏗 Architecture
-
-The application follows a clean and scalable structure.
-
-```
-lib/
-│
-├── models/
-├── services/
-├── providers/
-├── screens/
-├── widgets/
-├── utils/
-└── main.dart
-```
-
----
-
-# 🎯 Problem Statement
-
-Citizens often face difficulties because:
-
-- Government information is scattered.
-- Procedures are difficult to understand.
-- Requirements change frequently.
-- Official websites are not user-friendly.
-- People rely on misinformation.
-
----
-
-# 💡 Our Solution
-
-Porichoy simplifies government services by providing:
-
-- Centralized information
-- Easy language
-- Step-by-step guidance
-- Verified procedures
-- Organized document requirements
-
----
 
 # 🚀 Future Plans
 
@@ -224,15 +223,3 @@ LinkedIn:
 
 ---
 
-## ❤️ Built With
-
-Flutter • Firebase • Material 3
-
-If you like this project, consider giving it a ⭐ on GitHub!
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
