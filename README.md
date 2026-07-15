@@ -231,7 +231,13 @@ www.linkedin.com/in/meher-nigar-315135388
 ### Ariyer Nawar Purnota
 Github:
 https://github.com/ariyernawer
+LinkedIn:
+https://www.linkedin.com/in/ariyernawer/
 ### Jannatul Nayem Esha
+Github:
+https://github.com/jnesha2005
+LinkedIn:
+https://www.linkedin.com/in/jannatul-nayem-esha-3570ba334/
 
 
 
