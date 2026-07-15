@@ -140,7 +140,7 @@ Secure login system using Firebase Authentication.
 ---
 
 # 📷 Screenshots
-## ** Splash Screen**
+##  Splash Screen
 <p align="center">
   <img src="splash.jpeg" width="150">
   
@@ -174,14 +174,14 @@ Secure login system using Firebase Authentication.
   
 </p>
 
-## **Form Fill-Up**
+## Form Fill-Up
 <p align="center">
   <img src="formfillup.jpeg" width="150">
     <img src="formfill2.jpeg" width="150">
   
 </p>
 
-## ** Selection**
+##  Selection
 <p align="center">
   <img src="selection.jpeg" width="150">
   
@@ -206,7 +206,6 @@ Secure login system using Firebase Authentication.
 - Material 3
 - Google Fonts
 
----
 
 
 # 🚀 Future Plans
@@ -219,7 +218,7 @@ Secure login system using Firebase Authentication.
 - Offline mode
 - PDF document checklist
 
----
+
 
 # 👨‍💻 Developers
 
